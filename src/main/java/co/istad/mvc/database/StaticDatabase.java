@@ -1,15 +1,17 @@
 package co.istad.mvc.database;
 
 import co.istad.mvc.domain.Book;
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Getter
 public class StaticDatabase {
 
-    private List<Book> books;
+    private final List<Book> books;
 
     public StaticDatabase() {
 
@@ -42,10 +44,6 @@ public class StaticDatabase {
         books.add(book);
         books.add(book2);
         books.add(book3);
-    }
-
-    public List<Book> getBooks() {
-        return books;
     }
 
 }

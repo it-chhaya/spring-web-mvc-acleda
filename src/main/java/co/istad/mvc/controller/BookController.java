@@ -23,23 +23,22 @@ public class BookController {
             @RequestParam(name = "k", required = false, defaultValue = "") String keyword,
             @RequestParam(required = false) Boolean status
     ) {
-        System.out.println("Keyword: " + keyword);
         return staticDb
                 .getBooks()
                 .stream()
                 .filter(book -> {
-                        if (status != null) {
+                            if (status != null) {
+                                return book
+                                        .getTitle()
+                                        .toLowerCase()
+                                        .contains(keyword.toLowerCase())
+                                        && book.getStatus().equals(status);
+                            }
                             return book
                                     .getTitle()
                                     .toLowerCase()
-                                    .contains(keyword.toLowerCase())
-                                    && book.getStatus().equals(status);
+                                    .contains(keyword.toLowerCase());
                         }
-                    return book
-                            .getTitle()
-                            .toLowerCase()
-                            .contains(keyword.toLowerCase());
-                    }
                 )
                 .collect(Collectors.toList());
     }
