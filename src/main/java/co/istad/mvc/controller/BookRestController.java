@@ -1,6 +1,5 @@
 package co.istad.mvc.controller;
 
-import co.istad.mvc.domain.Book;
 import co.istad.mvc.dto.BookResponse;
 import co.istad.mvc.service.BookService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +16,7 @@ public class BookRestController {
 
     @GetMapping("/search")
     public List<BookResponse> searchBookByTitle(
-            @RequestParam(name = "k", required = false, defaultValue = "") String keyword,
+            @RequestParam(name = "k") String keyword,
             @RequestParam(required = false) Boolean status
     ) {
         return bookService.searchBookByTitleOrStatus(keyword, status);

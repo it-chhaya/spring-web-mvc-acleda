@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: spring-web-mvc
+springdoc:
+  swagger-ui:
+    path: /book-docs
