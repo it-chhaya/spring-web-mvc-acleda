@@ -30,7 +30,7 @@ public class BookServiceImpl implements BookService {
 
         // Write system logic
         Random random = new Random();
-        book.setId(random.nextInt());
+        book.setId(random.nextInt(1000000, 9000000));
         book.setCode("B-" + book.getId());
         book.setStatus(true);
 
