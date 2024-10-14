@@ -3,11 +3,14 @@ package co.istad.mvc.mapper;
 import co.istad.mvc.domain.Book;
 import co.istad.mvc.dto.BookResponse;
 import co.istad.mvc.dto.CreateBookRequest;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import co.istad.mvc.dto.UpdateBookRequest;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface BookMapper {
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void fromUpdateBookRequest(@MappingTarget Book book, UpdateBookRequest updateBookRequest);
 
     // Target Datasource (Target Source)
     // Original Datasource (Source)

@@ -2,6 +2,7 @@ package co.istad.mvc.controller;
 
 import co.istad.mvc.dto.BookResponse;
 import co.istad.mvc.dto.CreateBookRequest;
+import co.istad.mvc.dto.UpdateBookRequest;
 import co.istad.mvc.service.BookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,13 @@ import java.util.List;
 public class BookRestController {
 
     private final BookService bookService;
+
+
+    @PutMapping("/{code}")
+    BookResponse updateBookByCode(@PathVariable String code,
+                                  @Valid @RequestBody UpdateBookRequest updateBookRequest) {
+        return bookService.updateBookByCode(code, updateBookRequest);
+    }
 
 
     @ResponseStatus(HttpStatus.CREATED)

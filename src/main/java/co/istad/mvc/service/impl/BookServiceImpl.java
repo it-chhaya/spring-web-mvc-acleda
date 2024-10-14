@@ -4,6 +4,7 @@ import co.istad.mvc.database.StaticDatabase;
 import co.istad.mvc.domain.Book;
 import co.istad.mvc.dto.BookResponse;
 import co.istad.mvc.dto.CreateBookRequest;
+import co.istad.mvc.dto.UpdateBookRequest;
 import co.istad.mvc.mapper.BookMapper;
 import co.istad.mvc.service.BookService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,24 @@ public class BookServiceImpl implements BookService {
 
     private final StaticDatabase staticDb;
     private final BookMapper bookMapper;
+
+
+    @Override
+    public BookResponse updateBookByCode(String code, UpdateBookRequest updateBookRequest) {
+
+        // Validate book CODE
+        return staticDb
+                .getBooks()
+                .stream()
+                .filter(b -> b.getCode().equals(code))
+                .peek(b -> bookMapper.fromUpdateBookRequest(b, updateBookRequest))
+                .map(b -> bookMapper.toBookResponse(b))
+                .findFirst()
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Book code does not exist")
+                );
+    }
+
 
     @Override
     public BookResponse saveBook(CreateBookRequest createBookRequest) {
