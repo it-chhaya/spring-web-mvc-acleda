@@ -31,9 +31,9 @@ public class BookServiceImpl implements BookService {
         return staticDb
                 .getBooks()
                 .stream()
-                .filter(b -> b.getCode().equals(code))
+                .filter(b -> b.getCode().equals(code)) // lamda expression
                 .peek(b -> bookMapper.fromUpdateBookRequest(b, updateBookRequest))
-                .map(b -> bookMapper.toBookResponse(b))
+                .map(bookMapper::toBookResponse) // method reference
                 .findFirst()
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Book code does not exist")
